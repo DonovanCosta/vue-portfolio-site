@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <Navbar />
-    <Footer />
+    <Footer 
+        siteName="donovancosta.com"
+        />
   </div>
 </template>
 
@@ -14,7 +16,7 @@ export default {
   name: 'Home',
   components: {
     Navbar,
-    Footer
+    Footer,
   }
 }
 </script>

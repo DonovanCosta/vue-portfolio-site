@@ -1,7 +1,7 @@
 <template>
     <footer>
-        <b-container class="h-100">
-            <b-row class="align-items-center h-100">
+        <b-container>
+            <b-row>
                 <b-col cols="6">
                     <b-nav>
                         <b-nav-item active>Active</b-nav-item>
@@ -14,56 +14,17 @@
                     <div class="social-links">
                         <a class="btn btn-linkedin">
                             <font-awesome-icon :icon="['fab', 'linkedin']" />
-                           
                         </a>
                         <a class="btn btn-github">
                             <font-awesome-icon :icon="['fab', 'github']" />
                         </a>
                     </div>
-                     <!-- <div class="social-links">
-                        <a class="btn btn-linkedin">
-                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-                        </a>
-                        <a class="btn btn-github">
-                            <i class=" fab fa-github" aria-hidden="true"></i>
-                        </a>
-                    </div> -->
                 </b-col>
-                <!-- <b-col cols="12" > 
-                    <p class="copyright">&copy; {{ year }}, donovancosta.com</p>
-                </b-col> -->
             </b-row>
             <b-row class="text-center">
-                <b-col> &copy; {{ year }}, donovancosta.com</b-col>
+                <b-col> &copy; {{ year }}, {{siteName}}</b-col>
             </b-row>
         </b-container>
-        <!-- <div class="container">
-            <b-col cols="6">test</b-col>
-            <b-col cols="6">test</b-col>
-            <b-col cols="12">test</b-col>
-                <div class="menu-items">
-                    <ul class="list-unstyled">
-                        <li><a href="">Features</a></li>
-                        <li><a href="">Solutions</a></li>
-                        <li><a href="">Plans</a></li>
-                        <li><a href="">Sign in</a></li>
-                    </ul>
-                </div>
-                <div class="social-links">
-                    <a class="btn btn-linkedin">
-                        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-                    </a>
-                    <a class="btn btn-github">
-                        <i class=" fab fa-github" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
-            <div></div>
-            
-            <div class="copyright">
-                &copy; {{ year }}, donovancosta.com
-            </div> 
-        </div> -->
     </footer>
 </template>
 
@@ -74,6 +35,9 @@ export default {
         return {
             year: new Date().getFullYear()
         };
+    },
+    props:{
+        siteName: String
     }
 }
 </script>
@@ -84,9 +48,9 @@ footer {
     background: #333;
     color: #fff;
     box-shadow: 0px -5px 10px #888888;
-    height: 10em;
     position: relative;
-    /* justify-content: space-between; */
+    padding-top: 1em;
+    padding-bottom: 0.5em;
 }
 
 .copyright{
