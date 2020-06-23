@@ -8,6 +8,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 // user-secret icon - following guide on github
 import { faUserSecret , faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faFontAwesome, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+
+library.add(faFontAwesome,faGithub, faLinkedin)
 
 library.add(faUserSecret, faSpinner)
 
