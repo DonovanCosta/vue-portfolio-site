@@ -1,5 +1,9 @@
 <template>
     <div>
+        <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
         <b-navbar toggleable="lg" type="dark" variant="dark">
             <b-container>
                 <b-navbar-brand href="#">NavBar</b-navbar-brand>
