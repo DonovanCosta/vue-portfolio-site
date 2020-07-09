@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div id="projectDetail">
    <ProjectDetail />
   </div>
 </template>
@@ -9,7 +9,7 @@
 import ProjectDetail from '@/components/ProjectDetail.vue'
 
 export default {
-  name: 'About',
+  name: 'ProjectDetailView',
   components: {
     ProjectDetail
   }
