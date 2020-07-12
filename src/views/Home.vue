@@ -8,6 +8,7 @@
     <ProjectList 
         :project-list="projects"
     />
+    <ContactMe />
   </div>
 </template>
 
@@ -16,6 +17,7 @@
 import About from '@/components/About.vue'
 import CallToAction from '@/components/CallToAction.vue'
 import ProjectList from '@/components/ProjectList.vue'
+import ContactMe from '@/components/ContactMe.vue'
 
 import axios from 'axios'
 
@@ -30,7 +32,8 @@ export default {
   components: {
     About,
     CallToAction,
-    ProjectList
+    ProjectList,
+    ContactMe
   },
   //lifecycle hook
    created(){
