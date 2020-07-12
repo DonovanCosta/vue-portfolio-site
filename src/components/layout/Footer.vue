@@ -3,11 +3,10 @@
         <b-container>
             <b-row>
                 <b-col cols="6">
-                    <b-nav>
-                        <b-nav-item active>Active</b-nav-item>
-                        <b-nav-item>Link</b-nav-item>
-                        <b-nav-item>Another Link</b-nav-item>
-                        <b-nav-item>Disabled</b-nav-item>
+                    <b-nav class="footer_links">
+                        <b-nav-item :to="{ name:'Home', hash: '#about' }">About me</b-nav-item>
+                        <b-nav-item :to="{ name:'Home', hash: '#Projects' }">Projects</b-nav-item>
+                        <b-nav-item :to="{ name:'Home', hash: '#Contact' }">Contact me</b-nav-item>
                     </b-nav>
                 </b-col>
                 <b-col cols="6">
@@ -59,6 +58,11 @@ footer {
 
 .social-links svg {
     font-size: 30px;
+}
+
+.footer_links .nav-link {
+    color: #fff;
+    text-decoration: none;
 }
 
 /*
