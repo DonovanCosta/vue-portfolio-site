@@ -10,6 +10,10 @@ import { faUserSecret , faSpinner, faGlobe } from '@fortawesome/free-solid-svg-i
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faFontAwesome, faLinkedin, faGithub} from '@fortawesome/free-brands-svg-icons'
 
+import Vuelidate from 'vuelidate'
+
+Vue.use(Vuelidate)
+
 library.add(faFontAwesome,faGithub, faLinkedin)
 
 library.add(faUserSecret, faSpinner, faGlobe)
