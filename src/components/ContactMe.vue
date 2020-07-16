@@ -4,7 +4,7 @@
             <b-row align-h="center" align-v="center">
                 <b-col>
                     <h1>Contact me</h1>
-                    <h5> This is just some descriptive text</h5>
+                    <h5> {{contact_message}}</h5>
                 </b-col>
             </b-row>
             <b-row align-h="center" align-v="center">
@@ -53,7 +53,7 @@
                             ></b-form-textarea>
                              <label class="input-label" for="textarea"> <span class="label-text">Your message</span> </label>
                         </b-form-group>
-                        <b-button type="submit" pill variant="primary">Submit</b-button>
+                        <b-button class="contact_submit" >Submit</b-button>
                     </b-form>
                 </b-col>
 
@@ -68,6 +68,7 @@ import { required, minLength, email } from 'vuelidate/lib/validators'
 import axios from 'axios'
 export default {
     name: "ContactMe",
+    props:['contact_message'],
     data() {
       return {
         form: {
@@ -171,6 +172,12 @@ export default {
 }
 #Contact{
    padding: 1rem;
+    color: #000;
+    min-height: 500px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: auto;
 }
 #contactForm {
     margin-top: 1rem;
@@ -222,10 +229,10 @@ input:focus {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -1px;
+    bottom: -2px;
     height: 100%;
     width: 0%;
-    border-bottom: 3px solid purple;
+    border-bottom: 3px solid #0077b6;
     transition: width 0.3s ease-in;
 }
 
@@ -242,7 +249,7 @@ input:focus {
 #contactForm input:not(:placeholder-shown) + .input-label .label-text,
 #contactForm textarea:not(:placeholder-shown) + .input-label .label-text  {
     transform: translateY(-100%) scaleX(0.9) ;
-    color: purple;
+    color: #0077b6;
 }
 
 #contactForm input:focus + label::after,
@@ -252,4 +259,21 @@ input:focus {
     width:100% ;
 }
 
+.contact_submit,
+.contact_submit:active {
+    color: #fff;
+    background: #0096c7 ;
+    border: 1px solid #0096c7 ;
+}
+
+.contact_submit:hover {
+    color: #fff;
+    background: #00b4d8;
+    border: 1px solid #00b4d8;
+}
+
+.contact_submit:focus {
+    color: #fff;
+    box-shadow: 0 0 0 0.2rem #00b4d8;
+}
 </style>

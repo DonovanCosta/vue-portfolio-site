@@ -8,7 +8,9 @@
     <ProjectList 
         :project-list="projects"
     />
-    <ContactMe />
+    <ContactMe 
+        contact_message="If you would like to give feedback or know more, just send a message"
+    />
   </div>
 </template>
 
