@@ -44,12 +44,20 @@ export default {
 <style scoped>
  
 footer {
-    background: #333;
+    background: #0077b6;
     color: #fff;
-    box-shadow: 0px -5px 10px #888888;
-    position: relative;
+    position: absolute;
     padding-top: 1em;
     padding-bottom: 0.5em;
+    bottom: 0;
+    width: 100%;
+    height: 170px;
+}
+
+@media (min-width: 768px){
+    footer{
+        height: 95px;
+    }
 }
 
 .copyright{
@@ -60,9 +68,20 @@ footer {
     font-size: 30px;
 }
 
+footer .footer_links {
+    flex-direction: column;
+}
+
+@media (min-width:768px) {
+    footer .footer_links {
+        flex-direction: row;
+    }
+}
+
 .footer_links .nav-link {
     color: #fff;
     text-decoration: none;
+    flex-direction: column;
 }
 
 /*

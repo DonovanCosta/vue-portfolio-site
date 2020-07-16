@@ -1,11 +1,13 @@
 <template>
     <div id="app">
-        <Header>  
-            <Navbar />
-        </Header>
-        <transition name="fade" mode="out-in">
-            <router-view :key="$route.path"/>
-        </transition>  
+        <div id="content-wrap">
+            <Header>  
+                <Navbar />
+            </Header>
+            <transition name="fade" mode="out-in">
+                <router-view :key="$route.path"/>
+            </transition>  
+        </div>
         <Footer
             siteName="donovancosta.com" 
         />
@@ -28,72 +30,52 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
+body{
+     box-sizing: border-box;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+    color: #ffffff;
+  overflow: hidden;
+  background: #ffffff;
+  font-family: 'Roboto', sans-serif;
+    position: relative;
+  min-height: 100vh;
+
 }
 
 header{
-    height: 56px;
+    height: 72px;
+    width: 100%;
+    position: fixed;
+    z-index: 1030;
+}
+@media(min-width: 992px){
+    header{
+        height: 56px;
+    }
 }
 
-#nav {
-  padding: 30px;
+#content-wrap {
+  padding-bottom: 170px;    /* Footer height */
+  padding-top: 72px;        /* nabar height mobile */
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+
+@media(min-width: 992px){
+    #content-wrap {
+        padding-bottom: 95px;    /* Footer height */
+        padding-top: 56px; 
+    }
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-   .slide-enter-active,
-    .slide-leave-active {
-        transition: opacity 1s, transform 1s;
-    }
-
-    .slide-enter,
-    .slide-leave-to {
-        opacity: 0;
-        transform: translateX(-30%)
-    }
-
-    .moveUp-enter-active {
-        animation: fadeIn 1s ease-in;
-    }
-    @keyframes fadeIn {
-        0%{
-            opacity: 0;
-        }
-        50%{
-            opacity: 50%;
-        }
-        100%{
-            opacity: 1;
-        }
-    }
-
-    .moveUp-leave-active{
-        animation: moveUp 0.3s ease-in;
-    }
-    @keyframes moveUp {
-        0%{
-            transform: translateY(0);
-        }
-        100%{
-            transform: translateY(-400px);
-        }
-    }
 
     .fade-enter-active,
     .fade-leave-active {
         transition: opacity 0.3s;
-        
     }
 
     .fade-enter,

@@ -36,6 +36,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+#Projects{
+    background: #0077b6;
+    padding: 1rem;
+    background: linear-gradient(to bottom, #00b4d8, #0096c7 50%); /* Standard syntax (must be last) */
+}
 
 </style>

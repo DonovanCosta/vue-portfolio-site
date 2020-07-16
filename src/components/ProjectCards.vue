@@ -23,23 +23,25 @@ export default {
 <style scoped>
 
 .card {
+    color: #333;
     width: 400px;
     height: 400px;
     border-radius: 5px;
+    box-shadow: 10px 10px 10px #0077b6;
 }
-/* 
+
 .card_btn {
-    color: #4fbfa8;
+    color: #0096c7;
     background: none;
-    border: 2px solid #4fbfa8;
+    border: 2px solid #0096c7;
 }
 
 .card_btn:hover {
     color: #ffffff;
-    background: #4fbfa8;
-    border: 2px solid #4fbfa8;
+    background: #00b4d8;
+    border: 2px solid #00b4d8;
     transition:  0.3s ease-in;
-} */
+}
 
 
 </style>
