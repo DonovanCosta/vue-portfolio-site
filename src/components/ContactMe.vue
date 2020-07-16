@@ -12,7 +12,7 @@
                     <b-form @submit="onSubmit" v-if="show" id="contactForm">
                         <b-form-group id="input-group-1">                    
                             <b-form-input 
-                                id="input-1" 
+                                id="name" 
                                 v-model="$v.form.name.$model"
                                 :state="validateState('name')"
                                 required 
@@ -20,13 +20,16 @@
                                 @input="$v.form.name.$touch()" 
                                 @blur="$v.form.name.$touch()" 
                                 type="text"
-                                :error-messages="nameErrors">
+                            >
                             </b-form-input>
                             <label class="input-label" for="input-1"> <span class="label-text">Your Name</span> </label>
+                            <b-form-invalid-feedback
+                                id="name-feedback"
+                            ><span>{{ nameErrors[0]}}</span></b-form-invalid-feedback>
                         </b-form-group>
                         <b-form-group id="input-group-2">  
                             <b-form-input 
-                                id="input-2" 
+                                id="email" 
                                 v-model="$v.form.email.$model" 
                                 :state="validateState('email')"
                                 type="email" 
@@ -34,29 +37,44 @@
                                 placeholder=" "
                                 @input="$v.form.email.$touch()" 
                                 @blur="$v.form.email.$touch()" 
-                                :error-messages="emailErrors"
-                            ></b-form-input>
+                            >
+                            </b-form-input>
                             <label class="input-label" for="input-2"> <span class="label-text">Email address</span> </label>
+                            <b-form-invalid-feedback
+                                id="email-feedback"
+                            ><span>{{ emailErrors[0]}}</span></b-form-invalid-feedback>
                         </b-form-group>
                         <b-form-group id="input-group-3">
                             
                             <b-form-textarea 
                                 id="textarea" 
-                                v-model="$v.form.message.$model" 
+                                v-model="$v.form.message.$model"
+                                :state="validateState('message')"
                                 rows="3" 
                                 max-rows="6" 
                                 required 
                                 placeholder=" "
                                 @input="$v.form.message.$touch()" 
                                 @blur="$v.form.message.$touch()" 
-                                :error-messages="messageErrors"
+                                :invalid-feedback="messageErrors"
                             ></b-form-textarea>
                              <label class="input-label" for="textarea"> <span class="label-text">Your message</span> </label>
+                             <b-form-invalid-feedback
+                                id="textarea-feedback"
+                            ><span>{{ messageErrors[0]}}</span></b-form-invalid-feedback>
                         </b-form-group>
-                        <b-button class="contact_submit" >Submit</b-button>
+                        <b-button type="submit" class="contact_submit" >Submit</b-button>
                     </b-form>
+                    <div class="form_alert">
+                        <b-alert
+                            :show="dismissCountDown"
+                            dismissible
+                            :variant="alert_type"
+                        >
+                        {{ alert_message }}
+                        </b-alert>
+                    </div>
                 </b-col>
-
             </b-row>
         </b-container>
     </div>
@@ -77,7 +95,10 @@ export default {
           message: ''
           },
         submitStatus: null,
-        show: true
+        show: true,
+        dismissCountDown: 0,
+        alert_type: 'success',
+        alert_message: ''
        }
     },
     validations: {
@@ -99,7 +120,7 @@ export default {
         nameErrors() {
             const errors = [];
             if (!this.$v.form.name.$dirty) return errors;
-            !this.$v.form.name.minLength && errors.push('name must contain a minimum of 4 characters');
+            !this.$v.form.name.minLength && errors.push('The name is requeired and must contain a minimum of 4 characters');
             !this.$v.form.name.required && errors.push('A name is required');
             return errors;
         },
@@ -107,7 +128,7 @@ export default {
             const errors = [];
             if (!this.$v.form.email.$dirty) return errors;
             //!this.$v.form.email.minLength && errors.push('email must contain a minimum of 4 characters');
-            !this.$v.form.email.required && errors.push('A email is required');
+            !this.$v.form.email.required && errors.push('An email is required');
             return errors;
         },
         messageErrors() {
@@ -124,43 +145,45 @@ export default {
             const { $dirty, $error } = this.$v.form[name];
             return $dirty ? !$error : null;
         },
-      onSubmit(evt) {
-        evt.preventDefault()
-        console.log('submit!')
-        this.$v.$touch()
-        if (this.$v.$invalid) {
-            this.submitStatus = 'ERROR'
-        } else {
-            axios.post('http://127.0.0.1:8000/api/contact/', {
-                name: this.$v.form.name.$model,
-                email: this.$v.form.email.$model,
-                message: this.$v.form.message.$model
-            })
-            .then( (response) => {
-                console.log(response);
-            })
-            .catch( (error) => {
-                console.log(error);
-            });
+        onSubmit(evt) {
+            evt.preventDefault()
+            this.$v.$touch()
+            if (this.$v.$invalid) {
+                this.submitStatus = 'ERROR'
+            } else {
+                const data = this.form
+                axios.post('http://127.0.0.1:8000/api/contact/', data )
+                .then( (response) => {
+                    if(response.status == 201){
+                        this.dismissCountDown = 5
+                        this.alert_type = "success"
+                        this.alert_message = "Your message was sent"
+                        this.resetForm()
                     }
+                })
+                .catch( (error) => {
+                    if(error ){
+                        this.dismissCountDown = 5
+                        this.alert_type = "danger"
+                        this.alert_message = "Something went wrong. Please try again later."
+                        this.resetForm()
+                    }
+                });
+            }
+        }, 
+        resetForm() {
+            this.form = {
+                email: '',
+                name: '',
+                message: ''
+            };
 
-        alert(JSON.stringify(this.form))
-      },
-      onReset(evt) {
-        evt.preventDefault()
-        // Reset our form values
-        this.form.email = ''
-        this.form.name = ''
-        this.form.text = ''
-        this.form.checked = []
-        // Trick to reset/clear native browser form validation state
-        this.show = false
-        this.$nextTick(() => {
-          this.show = true
-        })
-      }
+            this.$nextTick(() => {
+                this.$v.$reset();
+            });
+        }
     }
-  }
+}
 </script>
 
 <style scoped>
@@ -275,5 +298,19 @@ input:focus {
 .contact_submit:focus {
     color: #fff;
     box-shadow: 0 0 0 0.2rem #00b4d8;
+}
+
+
+.invalid-feedback {
+    position: absolute;
+    bottom: -20px;
+}
+
+.form_alert {
+    position: absolute;
+    top: 10px;
+    margin: auto;
+    left: 0;
+    right: 0;
 }
 </style>
