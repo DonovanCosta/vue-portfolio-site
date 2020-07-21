@@ -19,6 +19,7 @@
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
+    "vue-video-player": "^5.0.2",
     "vuelidate": "^0.7.5"
   },
   "devDependencies": {
@@ -51,7 +52,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+        "no-unused-vars": "off"
+    }
   },
   "browserslist": [
     "> 1%",

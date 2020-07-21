@@ -27,7 +27,17 @@
                 </b-row>
                 <b-row>
                     <b-col class="media project_media" lg="8">
-                        <b-img :src="projectData.image" fluid alt="Responsive image"></b-img>
+                        <div v-if="projectData.video !== null " class="video_wrapper">
+                            <video-player  class="video-player-box"
+                                            ref="videoPlayer"
+                                            :options="playerOptions"
+                                            :playsinline="true"
+                                            >
+                            </video-player>
+                        </div>
+                        <div v-else>
+                            <b-img :src="projectData.image" fluid alt="Responsive image"></b-img>
+                        </div>
                     </b-col>
                     <b-col lg="4">
                         <div id="technologies_used">
@@ -37,13 +47,13 @@
                             </ul>
                             <div class="align-items-center mt-3">
                                 <div class="d-flex outlinks">
-                                    <a type="button" class="btn btn-sm btn-outline-secondary link_btn" :href="projectData.github_link" target="_blank">                                     
+                                    <a v-if="projectData.github_link !== null " type="button" class="btn btn-sm btn-outline-secondary link_btn" :href="projectData.github_link" target="_blank">                                     
                                         <label for="">
                                             <font-awesome-icon :icon="['fab', 'github']" />
                                             <span> Source </span>
                                         </label>                                       
                                     </a>
-                                    <a type="button" class="btn btn-sm btn-outline-secondary link_btn" :href="projectData.preview_link" target="_blank">
+                                    <a v-if="projectData.preview_link !== null " type="button" class="btn btn-sm btn-outline-secondary link_btn" :href="projectData.preview_link" target="_blank">
                                         <span>
                                             <font-awesome-icon :icon="['fas', 'globe']" />
                                             <span> Preview</span>
@@ -65,17 +75,36 @@
 
 <script>
 import axios from 'axios'
+import { videoPlayer } from 'vue-video-player'
+import 'video.js/dist/video-js.css'
 
 export default {
     name: "ProjectDetail",
+    components: {
+        videoPlayer
+    },
     data(){
         return{
             projectData: [],
             id:this.$route.params.id,
             show_overlay: true,
             fetchingData: true,
-            fetchingError: false
+            fetchingError: false,
+            playerOptions: {
+                // videojs options
+                muted: true,
+                language: 'en',
+                fluid: true,
+                autoplay: true,
+                 sources: [],
+                poster: "/static/images/author.jpg",
+            }
         }
+    },
+    computed: {
+      player() {
+        return this.$refs.videoPlayer.player
+      },
     },
     methods: {
         goBack(){
@@ -85,13 +114,17 @@ export default {
     async created(){
         await axios.get(`http://127.0.0.1:8000/api/projects/${this.$route.params.id}`)
         .then( res => { 
-            this.projectData = res.data; 
+            this.projectData = res.data;
             this.show_overlay = false
+            this.playerOptions.sources = [{
+                type: "video/mp4",
+                src: this.projectData.video//'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+                }]
+                this.player.muted(false)
         })
         .catch(err => {
             this.fetchingData = false;
             this.fetchingError = true;
-            console.log(err)
         })
     }
 }
@@ -193,5 +226,9 @@ export default {
     .back_btn:active {
         background-color: #00b4d8;
     }
-
+    .video_wrapper{
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
 </style>
