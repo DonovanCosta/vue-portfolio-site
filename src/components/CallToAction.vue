@@ -126,12 +126,12 @@ export default {
 
     .fade-enter-active,
     .fade-leave-active {
-        animation: fadeIn 4s ease-in reverse;
+        animation: fadeIn 4s linear reverse;
     }
 
     .fade-enter,
     .fade-leave-to {
-        animation: fadeIn 4s ease-in;
+        animation: fadeIn 4s linear;
     }
 
     @keyframes fadeIn {
