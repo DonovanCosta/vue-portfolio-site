@@ -11,10 +11,10 @@
                 </b-col>
                 <b-col cols="6">
                     <div class="social-links">
-                        <a class="btn btn-linkedin">
+                        <a class="btn btn-linkedin" href="https://www.linkedin.com/in/donovancosta/" target="_blank">
                             <font-awesome-icon :icon="['fab', 'linkedin']" />
                         </a>
-                        <a class="btn btn-github">
+                        <a class="btn btn-github" href="https://github.com/DonovanCosta" target="_blank">
                             <font-awesome-icon :icon="['fab', 'github']" />
                         </a>
                     </div>
@@ -32,11 +32,15 @@ export default {
     name: "Footer",
     data(){
         return {
-            year: new Date().getFullYear()
+            year: new Date().getFullYear(),
+            github: '',
+            linkedin: ''
         };
     },
     props:{
-        siteName: String
+        siteName: String,
+        href: String
+       
     }
 }
 </script>
@@ -66,6 +70,7 @@ footer {
 
 .social-links svg {
     font-size: 30px;
+    color: #fff;
 }
 
 footer .footer_links {
