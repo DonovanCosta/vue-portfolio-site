@@ -25,7 +25,7 @@ export default {
 .card {
     color: #333;
     width: 400px;
-    height: 400px;
+    height: 420px;
     border-radius: 5px;
     box-shadow: 10px 10px 10px #0077b6;
 }
