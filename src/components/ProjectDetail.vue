@@ -19,56 +19,68 @@
                     </div>
                 </div>
             </template>
-            <b-container>
-                <b-row>
-                    <b-col class="m-5">
-                        <h1>{{projectData.project_name}}</h1>
-                    </b-col>
-                </b-row>
-                <b-row>
-                    <b-col class="media project_media" lg="8">
-                        <div v-if="projectData.video !== null " class="video_wrapper">
-                            <video-player  class="video-player-box"
-                                            ref="videoPlayer"
-                                            :options="playerOptions"
-                                            :playsinline="true"
-                                            >
-                            </video-player>
-                        </div>
-                        <div v-else>
-                            <b-img :src="projectData.image" fluid alt="Responsive image"></b-img>
-                        </div>
-                    </b-col>
-                    <b-col lg="4">
-                        <div id="technologies_used">
-                            <p>Technologies used:</p>
-                            <ul class="tech">
-                                <li v-for="technology in projectData.technologies" :key="technology" ><span>{{ technology }}</span></li>
-                            </ul>
-                            <div class="align-items-center mt-3">
-                                <div class="d-flex outlinks">
-                                    <a v-if="projectData.github_link !== null " type="button" class="btn btn-sm btn-outline-secondary link_btn" :href="projectData.github_link" target="_blank">                                     
-                                        <label for="">
-                                            <font-awesome-icon :icon="['fab', 'github']" />
-                                            <span> Source </span>
-                                        </label>                                       
-                                    </a>
-                                    <a v-if="projectData.preview_link !== null " type="button" class="btn btn-sm btn-outline-secondary link_btn" :href="projectData.preview_link" target="_blank">
-                                        <span>
-                                            <font-awesome-icon :icon="['fas', 'globe']" />
-                                            <span> Preview</span>
-                                        </span>
-                                    </a>
+            <div id="project_title">
+                <b-container>
+                    <b-row>
+                        <b-col class="m-5">
+                            <h1>{{projectData.project_name}}</h1>
+                        </b-col>
+                    </b-row>
+                </b-container>
+            </div>
+            <div id="project_media">
+                <b-container>
+                    <b-row align-h="center">
+                        <b-col class="media" lg="10">
+                            <div v-if="projectData.video !== null " class="video_wrapper">
+                                <video-player  class="video-player-box"
+                                                ref="videoPlayer"
+                                                :options="playerOptions"
+                                                :playsinline="true"
+                                                >
+                                </video-player>
+                            </div>
+                            <div v-else>
+                                <b-img :src="projectData.image" fluid alt="Responsive image"></b-img>
+                            </div>
+                        </b-col>
+                    </b-row>
+                </b-container>
+            </div>
+            <div id="project_details">
+                <b-container>
+                    <b-row align-h="center">
+                        <b-col lg="8">
+                            <div id="technologies_used" class="mt-3">
+                                <p class="lead">Technologies used:</p>
+                                <ul class="tech">
+                                    <li v-for="technology in projectData.technologies" :key="technology" ><span>{{ technology }}</span></li>
+                                </ul>
+                                <div class="align-items-center mt-3">
+                                    <div class="d-flex outlinks">
+                                        <a v-if="projectData.github_link !== null " type="button" class="btn btn-sm link_btn" :href="projectData.github_link" target="_blank">                                     
+                                            <label for="">
+                                                <font-awesome-icon :icon="['fab', 'github']" />
+                                                <span> Source </span>
+                                            </label>                                       
+                                        </a>
+                                        <a v-if="projectData.preview_link !== null " type="button" class="btn btn-sm link_btn" :href="projectData.preview_link" target="_blank">
+                                            <span>
+                                                <font-awesome-icon :icon="['fas', 'globe']" />
+                                                <span> Preview</span>
+                                            </span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </b-col>
-                    <b-col cols="12">
-                        <p class="project_detail_text mt-5" v-html="projectData.content"></p>
-                        <b-button class="back_btn" variant="primary" @click="goBack" >Back to the projects</b-button>
-                    </b-col>
-                </b-row>
-            </b-container>
+                        </b-col>
+                        <b-col cols="12">
+                            <p class="project_detail_text mt-5" v-html="projectData.content"></p>
+                            <b-button class="back_btn" variant="primary" @click="goBack" >Back to the projects</b-button>
+                        </b-col>
+                    </b-row>
+                </b-container>
+            </div>
         </b-overlay>
     </div>
 </template>
@@ -95,8 +107,9 @@ export default {
                 muted: true,
                 language: 'en',
                 fluid: true,
-                autoplay: true,
-                 sources: [],
+                autoplay: false,
+                aspectRatio: '16:9',
+                sources: [],
                 poster: "/static/images/author.jpg",
             }
         }
@@ -193,6 +206,11 @@ export default {
     .link_btn span {
         height: 100%;
         padding-left: 5px;
+    }
+
+    #project_media{
+        background: #0077b6;
+        background: linear-gradient(to bottom, #00b4d8, #0096c7 50%); /* Standard syntax (must be last) */
     }
     
     .project_media {
