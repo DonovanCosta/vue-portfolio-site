@@ -1,5 +1,5 @@
 <template>
-    <div id="about" class="about">
+    <div id="about" class="about mb-5">
         <b-container>
             <b-row justify align-v="center" align-h="center" >
                 <b-col cols="12" class="about_text">
@@ -7,14 +7,12 @@
                     <div class="lead" v-html="about_me"></div>
                 </b-col>
             </b-row>
-             <hr>
-            <b-row>
+            <b-row v-if="experience">
                 <b-col cols="12" class="experiences">
                     <h1>experience</h1>
                     <div v-html="experience"></div>
                 </b-col>
             </b-row>
-            <hr>
         </b-container>
     </div>
 </template>
