@@ -41,11 +41,11 @@ export default {
    created(){
 
         function getBiography() {
-            return axios.get('http://127.0.0.1:8000/api/bio/');
+            return axios.get( process.env.VUE_APP_BACKEND_API + 'bio/');
         }
 
         function getProjectsList() {
-            return axios.get('http://127.0.0.1:8000/api/projects/');
+            return axios.get(process.env.VUE_APP_BACKEND_API + 'projects/');
         }
 
         Promise.all([getBiography(), getProjectsList()])

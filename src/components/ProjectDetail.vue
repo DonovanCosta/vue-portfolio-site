@@ -125,7 +125,7 @@ export default {
         }
     },
     async created(){
-        await axios.get(`http://127.0.0.1:8000/api/projects/${this.$route.params.id}`)
+        await axios.get( process.env.VUE_APP_BACKEND_API + `projects/${this.$route.params.id}`)
         .then( res => { 
             this.projectData = res.data;
             this.show_overlay = false

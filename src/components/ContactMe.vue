@@ -152,7 +152,7 @@ export default {
                 this.submitStatus = 'ERROR'
             } else {
                 const data = this.form
-                axios.post('http://127.0.0.1:8000/api/contact/', data )
+                axios.post( process.env.VUE_APP_BACKEND_API + 'contact/', data )
                 .then( (response) => {
                     if(response.status == 201){
                         this.dismissCountDown = 5

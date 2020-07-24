@@ -33,8 +33,8 @@ export default {
     data(){
         return {
             year: new Date().getFullYear(),
-            github: '',
-            linkedin: ''
+            github: process.env.VUE_APP_GITHUB_LINK,
+            linkedin: process.env.VUE_APP_LINKEDIN_LINK
         };
     },
     props:{
