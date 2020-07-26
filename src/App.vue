@@ -75,23 +75,11 @@ header{
 
     .fade-enter-active,
     .fade-leave-active {
-        transition: opacity 0.3s;
+        transition: opacity 1.5s ease;
     }
 
     .fade-enter,
-    .fade-leave-to {
-        /* opacity: 0; */
-        animation: fadeIn 1s ease-in;
-    }
-    @keyframes fadeIn {
-        0%{
-            opacity: 1;
-        }
-        50%{
-            opacity: 50%;
-        }
-        100%{
-            opacity: 0;
-        }
+    .fade-leave-active {
+        opacity: 0
     }
 </style>
