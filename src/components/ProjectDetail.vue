@@ -89,6 +89,7 @@
 import axios from 'axios'
 import { videoPlayer } from 'vue-video-player'
 import 'video.js/dist/video-js.css'
+import '../assets/css/custom_videojs.css'
 
 export default {
     name: "ProjectDetail",
